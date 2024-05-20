@@ -1,0 +1,383 @@
+/* Genel stiller */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f2f1;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+h1 {
+    color: #00695c;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #009688;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #00796b;
+}
+
+.progress-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Çemberler ve düğmeler arasındaki boşluğu artır */
+}
+
+.progress-circle {
+    margin: 5px; /* Çemberler arasındaki boşluğu azalt */
+    flex: 1 1 auto; /* Otomatik genişlik ayarı, içerik genişliğine göre */
+}
+
+.progress-ring {
+    animation: progressAnimation 2s ease-out forwards;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+.progress-text {
+    transform: translate(0%, -5%);
+    font-size: 16px;
+}
+
+@keyframes progressAnimation {
+    from {
+        stroke-dasharray: 0 1000;
+    }
+    to {
+        stroke-dasharray: 628 1000;
+    }
+}
+
+.theme-switch-container {
+    margin-top: 20px;
+}
+
+.theme-switch-label {
+    margin: 0 10px;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.sun-icon,
+.moon-icon {
+    font-size: 24px;
+    margin-right: 5px;
+}
+
+.dark-theme {
+    background-color: #263238;
+    color: #ffffff;
+}
+
+.dark-theme .progress-ring {
+    stroke: #80cbc4;
+}
+
+.dark-theme .progress-text {
+    fill: #ffffff;
+}
+
+/* Küçük ekranlar için düzenler */
+@media only screen and (max-width: 600px) {
+    .container {
+        margin-top: 20px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .buttons {
+        margin-top: 10px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 14px;
+        margin: 3px;
+        border-radius: 3px;
+    }
+
+    .progress-container {
+        margin-top: 20px; /* Çemberler ve düğmeler arasındaki boşluğu artır */
+        flex-direction: row; /* Çemberleri yatay olarak sırala */
+        overflow-x: auto; /* Eğer progress barlar sığmazsa yatay kaydırma sağla */
+    }
+
+    .progress-circle {
+        margin: 5px; /* Çemberler arasındaki boşluğu azalt */
+        width: 200px; /* Progress çemberlerinin sabit genişlikte olmasını sağla */
+    }
+
+    .progress-text {
+        font-size: 14px;
+    }
+
+    .sun-icon,
+    .moon-icon {
+        font-size: 20px;
+    }
+}
+
+/* Fire animation */
+@keyframes scaleUpDown {
+    0%,
+    100% {
+        transform: scaleY(1) scaleX(1);
+    }
+    50%,
+    90% {
+        transform: scaleY(1.1);
+    }
+    75% {
+        transform: scaleY(0.95);
+    }
+    80% {
+        transform: scaleX(0.95);
+    }
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: skewX(0) scale(1);
+    }
+    50% {
+        transform: skewX(5deg) scale(0.9);
+    }
+}
+
+@keyframes particleUp {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        top: -100%;
+        transform: scale(0.5);
+    }
+}
+
+@keyframes glow {
+    0%,
+    100% {
+        background-color: #ef5a00;
+    }
+    50% {
+        background-color: #ff7800;
+    }
+}
+
+.fire {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    margin-top: 10em;
+    margin-left: auto;
+    margin-right: auto;
+    display: none; /* Varsayılan olarak animasyonu görünmez yap */
+}
+
+.fire.active {
+    display: block; /* heatMode aktif olduğunda animasyonu görünür yap */
+}
+
+.fire-main {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    animation: scaleUpDown 3s ease-out;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.fire-main .main-fire {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(farthest-corner at 10px 0, #d43300 0%, #ef5a00 95%);
+    transform: scaleX(0.8) rotate(45deg);
+    border-radius: 0 40% 60% 40%;
+    filter: drop-shadow(0 0 10px #d43322);
+}
+
+.fire-main .particle-fire {
+    position: absolute;
+    top: 60%;
+    left: 45%;
+    width: 10px;
+    height: 10px;
+    background-color: #ef5a00;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 10px #d43322);
+    animation: particleUp 2s ease-out 0;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.fire-right {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    animation: shake 2s ease-out 0;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.fire-right .main-fire {
+    position: absolute;
+    top: 15%;
+    right: -25%;
+    width: 80%;
+    height: 80%;
+    background-color: #ef5a00;
+    transform: scaleX(0.8) rotate(45deg);
+    border-radius: 0 40% 60% 40%;
+    filter: drop-shadow(0 0 10px #d43322);
+}
+
+.fire-right .particle-fire {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    background-color: #ef5a00;
+    transform: scaleX(0.8) rotate(45deg);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 10px #d43322);
+    animation: particleUp 2s ease-out 0;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.fire-left {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    animation: shake 3s ease-out 0;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.fire-left .main-fire {
+    position: absolute;
+    top: 15%;
+    left: -20%;
+    width: 80%;
+    height: 80%;
+    background-color: #ef5a00;
+    transform: scaleX(0.8) rotate(45deg);
+    border-radius: 0 40% 60% 40%;
+    filter: drop-shadow(0 0 10px #d43322);
+}
+
+.fire-left .particle-fire {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 10%;
+    height: 10%;
+    background-color: #ef5a00;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 10px #d43322);
+    animation: particleUp 3s infinite ease-out 0;
+    animation-fill-mode: both;
+}
+
+.fire-bottom .main-fire {   
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    width: 75%;
+    height: 75%;
+    background-color: #ff7800;
+    transform: scaleX(0.8) rotate(45deg);
+    border-radius: 0 40% 100% 40%;
+    filter: blur(10px);
+    animation: glow 2s ease-out 0;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+
+
