@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Conditioner Control</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Air Conditioner Control</h1>
+        <div class="theme-switch-container">
+            <span class="sun-icon">&#9728;</span>
+            <label class="theme-switch">
+                <input type="checkbox" id="theme-switch">
+                <span class="slider round"></span>
+            </label>
+            <span class="moon-icon">&#9790;</span>
+        </div>
+        <div class="progress-container">
+            <svg class="progress-circle" width="200" height="200">
+                <circle class="progress-ring" id="humidity-progress" stroke="#00796b" stroke-width="12" fill="transparent" r="80" cx="100" cy="100"/>
+                <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" class="progress-text" id="humidity-text">Nem: 0%</text>
+            </svg>
+            <svg class="progress-circle" width="200" height="200">
+                <circle class="progress-ring" id="temperature-progress" stroke="#00796b" stroke-width="12" fill="transparent" r="80" cx="100" cy="100"/>
+                <text x="50%" y="50%" text-anchor="middle" alignment-baseline="middle" class="progress-text" id="temperature-text">Sıcaklık: 0°C</text>
+            </svg>
+        </div>
+        <div id="current-mode">
+            Klima <span id="mode-text"></span> modda ve <span id="temperature-setting"></span> derece sıcaklığına ayarlı
+        </div>
+        <div class="buttons">
+            <button id="temp-up">+</button>
+            <button id="temp-down">-</button>
+        </div>
+        <div class="buttons">
+            <button id="heatMode">Heat Mode</button>
+            <button id="coolMode">Cool Mode</button>
+            <button id="onButton">Power OFF</button>
+        </div>
+        
+        <!-- Ateş animasyonunu ekliyoruz -->
+        <div id="fire-animation" class="fire"> 
+            <div class="fire-left">
+                <div class="main-fire"></div>
+                <div class="particle-fire"></div>
+            </div>
+            <div class="fire-main">
+                <div class="main-fire"></div>
+                <div class="particle-fire"></div>
+            </div>
+            <div class="fire-right">
+                <div class="main-fire"></div>
+                <div class="particle-fire"></div>
+            </div>
+            <div class="fire-bottom">
+                <div class="main-fire"></div>
+            </div>
+        </div>
+
+        
+    <!-- Modal -->
+    <div class="modal fade" id="temperatureModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="modal-message"></p>
+                    <input type="number" id="temperatureInput" class="form-control" placeholder="Örn: 25" required>
+                    <div id="modalAlert" class="alert alert-danger d-none" role="alert">Geçersiz bir sıcaklık değeri girdiniz. Lütfen 16 ile 30 derece arasında bir sayı girin.</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary" onclick="saveTemperature()">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
